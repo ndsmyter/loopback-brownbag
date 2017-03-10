@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "dive": {
+    "dataSource": "postgres-db",
+    "public": true
+  },
+  "location": {
+    "dataSource": "postgres-db",
+    "public": true
+  },
+  "participant": {
+    "dataSource": "postgres-db",
+    "public": true
+  }
+}

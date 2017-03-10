@@ -1,0 +1,40 @@
+{
+  "name": "dive",
+  "plural": "dives",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "postgresql": {
+      "schema": "mantis",
+      "table": "dives"
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date"
+    },
+    "location_id": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "participants": {
+      "type": "hasMany",
+      "model": "participant",
+      "foreignKey": "dive_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

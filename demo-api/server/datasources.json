@@ -1,0 +1,22 @@
+{
+  "postgres-db": {
+    "host": "localhost",
+    "port": 5432,
+    "url": "postgres://postgres:postgres@localhost/mantis",
+    "database": "mantis",
+    "password": "postgres",
+    "name": "postgres-db",
+    "user": "postgres",
+    "connector": "postgresql"
+  },
+  "postgres-db2": {
+    "host": "localhost",
+    "port": 5432,
+    "url": "",
+    "database": "mantis",
+    "password": "postgres",
+    "name": "postgres-db2",
+    "user": "postgres",
+    "connector": "postgresql"
+  }
+}
