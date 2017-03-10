@@ -150,47 +150,51 @@ We haven't given that information yet.
 
 In `demo-api/common/models/dive.json` add the following to the `options` key:
 
+```json
+"postgresql": {
+  "schema": "mantis",
+  "table": "dives"
+}
+```
+    
+For the `dive.json`, this becomes:
+
+```json
+{
+  "name": "dive",
+  "plural": "dives",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
     "postgresql": {
       "schema": "mantis",
       "table": "dives"
     }
-    
-For the `dive.json`, this becomes:
-
-    {
-      "name": "dive",
-      "plural": "dives",
-      "base": "PersistedModel",
-      "idInjection": true,
-      "options": {
-        "validateUpsert": true,
-        "postgresql": {
-          "schema": "mantis",
-          "table": "dives"
-        }
-      },
-      "properties": {
-        "id": {
-          "type": "number",
-          "required": true
-        },
-        "name": {
-          "type": "string",
-          "required": true
-        },
-        "date": {
-          "type": "date"
-        },
-        "location_id": {
-          "type": "number",
-          "required": true
-        }
-      },
-      "validations": [],
-      "relations": {},
-      "acls": [],
-      "methods": {}
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date"
+    },
+    "location_id": {
+      "type": "number",
+      "required": true
     }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
+```
 
 Do accordingly for the other models.
 
@@ -210,8 +214,29 @@ Now that the basic API is set up, requesting data can be tested.
 Testing using the explorer is a good way to start.
 Go to `localhost:3000/explorer` in your favorite browser (the server should of course be running).
 The endpoints that were configured, are listed on this page.
-If you click on an endpoint, all the possible actions are mentioned, and the method that will be used to request the
-information (or update the server). 
+If you click on an endpoint, all the possible operations are listed, and the method that will be used to request the
+information (or update the server).
+Clicking on a possible operation will open some more information.
+Showing the information that you can request, or the information that you need to provide.
+Clicking on "Try it out!" will execute the operation on the server.
+The result (if any) of the operation will appear on the screen.
+The request URL that was used is listed, together with the curl command to execute it on the command line.
+
+In the case of the `dives` endpoint, a GET `/dives` will return all the dives in the database.
+
+Playing around with the explorer really helps in understanding how the API works and how everything is linked together.
+
+## Filters
+
+If you work with large datasets, sooner or later the requirement will pop up to do some filtering.
+Every basic call is therefor provided with the basic filtering options: fields, where, include, order, offset and limit.
+
+So you select which `fields` you want to have returned,
+or select only the values that meet a certain condition using `where`.
+Or what about `order`ing and `limit`ing the values.
+ 
+More information can be found on the
+[tutorial page of the Loopback site](http://loopback.io/doc/en/lb3/Querying-data.html).
 
 # Let's go further !
 
@@ -243,11 +268,52 @@ The same can be done between the dive and the location.
 Sometimes the actions that should be executed, are more advanced, or require access to multiple endpoints.
 The solution for these problems are "remote methods".
 
+Using a remote method, a new operation is added to the selected endpoint.
+The implementation of this operation is written in the `/common/models/<endpoint>.js` file.
+
+It's possible to execute the basic actions of the model on the object itself.
+Every model has several methods that can be used, among others: `create`, `updateAll`, `updateAttribute`,
+`createUpdates`, `destroyAll`. 
+
+For example:
+
+```javascript
+/**
+ * Find the planned dives for the given country.
+ * @param country the country for which the dives should be returned
+ * @param cb      callback function, for asynchronous access. First parameter is the error (or null if none),
+ * the second parameter is the result.
+ */
+Dive.divesByCountry = function (country, cb) {
+    var Location = app.models.location;
+
+    Location.find({fields: ["id"], where: {location: country}}, function (err, locations) {
+        var locationIds = [];
+        for (var i = 0, length = locations.length; i < length; i++) {
+            locationIds.push(locations[i].id);
+        }
+        Dive.find({where: {location_id: {"inq": locationIds}}}, cb);
+    })
+};
+
+Dive.remoteMethod('divesByCountry', {
+    accepts: {arg: 'country', type: 'string'},
+    returns: {arg: 'dives', type: 'Dive[]'}
+});
+```
 
 ## Security !
 
 It makes sense that you want to protect your application from unauthorized access.
 Loopback has its own built in system that allows user management.
+
+## Debugging
+
+There will probably come a time, you will need debugging of the queries that are begin executed.
+The easiest way to do this, is by using the command `DEBUG=loopback:connector:postgresql node .` instead of just 
+`node .`.
+After executing this command, the executed queries of the PostgreSQL connector will be printed to the console.
+Of course you can also change the path in the `DEBUG` parameter to some other connector, or another component.
 
 
 # Now some more automatic way
