@@ -40,13 +40,13 @@ LoopBack is a highly-extensible, open-source Node.js framework that enables you 
 \section{Installation and configuration}
 \subsection{First setup}
 \begin{frame}{First setup}
-\texttt{\$ npm install -g loopback-cli}\\
-\texttt{\$ lb}
+\texttt{\$ \textbf{npm install -g loopback-cli}}\\
+\texttt{\$ \textbf{lb}}
 \end{frame}
 
 \subsection{Configure database}
 \begin{frame}{Configure database}
-\texttt{\$ lb datasource}\\
+\texttt{\$ \textbf{lb datasource}}\\
 \texttt{    ? Enter the data-source name: \textbf{postgres-db}}\\
 \texttt{    ? Select the connector for oracledb: \textbf{PostgreSQL}}\\
 \texttt{    Connector specific configuration:}\\
@@ -62,7 +62,7 @@ LoopBack is a highly-extensible, open-source Node.js framework that enables you 
 
 \subsection{Configure model}
 \begin{frame}{Configure model}
-\texttt{\$ lb model}\\
+\texttt{\$ \textbf{lb model}}\\
 \texttt{ ? Enter the model name: \textbf{dive}}\\
 \texttt{ ? Select the data-source to attach dive to: \textbf{postgres-db}}\\
 \texttt{ ? Select model's base class \textbf{PersistedModel}}\\
@@ -80,7 +80,7 @@ LoopBack is a highly-extensible, open-source Node.js framework that enables you 
 \texttt{    ? Default value [leave empty for none]: }
 \end{frame}
 \begin{frame}[fragile]{Link models}
-\texttt{\$ lb relation}
+\texttt{\$ \textbf{lb relation}}
 \texttt{    ? Name of the model to create the relationship from:  \textbf{dive}}\\
 \texttt{    ? Relation type: \textbf{has many}}\\
 \texttt{    ? Name of the model to create a relationship with: \textbf{participant}}\\
@@ -91,10 +91,10 @@ LoopBack is a highly-extensible, open-source Node.js framework that enables you 
 
 \subsection{Start API server}
 \begin{frame}{Start API server}
-\texttt{\$ node .}\\
+\texttt{\$ \textbf{node .}}\\
 ~\\
 In debugging mode:\\
-\texttt{\$ DEBUG=loopback:connector:postgresql node .}
+\texttt{\$ \textbf{DEBUG=loopback:connector:postgresql node .}}
 \end{frame}
 
 
@@ -102,6 +102,14 @@ In debugging mode:\\
 \begin{frame}{Query data}
 Use the built-in explorer: \url{http://localhost:3000/explorer}\\
 \includegraphics[width=\textwidth]{images/explorer-overview.jpg} 
+\end{frame}
+
+\begin{frame}{Query data - Request}
+\includegraphics[width=\textwidth]{images/explorer-request.jpg} 
+\end{frame}
+
+\begin{frame}{Query data - Response}
+\includegraphics[width=\textwidth]{images/explorer-response.jpg} 
 \end{frame}
 
 \begin{frame}{The End}
