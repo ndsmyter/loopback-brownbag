@@ -1,0 +1,116 @@
+\documentclass[11pt]{beamer}
+\usetheme{Frankfurt}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bold-extra}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{adjustbox}
+\author{Nicolas De Smyter}
+\title{Standardized API Development}
+\setbeamercovered{transparent} 
+%\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+\institute{FDS} 
+\date{March 17, 2017} 
+%\subject{} 
+
+\newlength\slideheight
+\setlength\slideheight{3cm}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Intro}
+\begin{frame}{Loopback}
+LoopBack is a highly-extensible, open-source Node.js framework that enables you to create dynamic end-to-end REST APIs with little or no coding.
+\end{frame}
+
+\section{Installation and configuration}
+\subsection{First setup}
+\begin{frame}{First setup}
+\texttt{\$ npm install -g loopback-cli}\\
+\texttt{\$ lb}
+\end{frame}
+
+\subsection{Configure database}
+\begin{frame}{Configure database}
+\texttt{\$ lb datasource}\\
+\texttt{    ? Enter the data-source name: \textbf{postgres-db}}\\
+\texttt{    ? Select the connector for oracledb: \textbf{PostgreSQL}}\\
+\texttt{    Connector specific configuration:}\\
+\texttt{    ? Connection String url to override other settings:}\\
+\texttt{    	\textbf{postgres://postgres:postgres@localhost/mantis}}\\
+\texttt{    ? host: \textbf{localhost}}\\
+\texttt{    ? port: \textbf{5432}}\\
+\texttt{    ? user: \textbf{postgres}}\\
+\texttt{    ? password: \textbf{********}}\\
+\texttt{    ? database: \textbf{mantis}}\\
+\texttt{    ? install loopback-connector-postgresql@\^{}2.4 \textbf{Yes}}
+\end{frame}
+
+\subsection{Configure model}
+\begin{frame}{Configure model}
+\texttt{\$ lb model}\\
+\texttt{ ? Enter the model name: \textbf{dive}}\\
+\texttt{ ? Select the data-source to attach dive to: \textbf{postgres-db}}\\
+\texttt{ ? Select model's base class \textbf{PersistedModel}}\\
+\texttt{ ? Expose dive via the REST API? \textbf{Yes}}\\
+\texttt{ ? Custom plural form (used to build REST URL): \textbf{dives}}\\
+\texttt{ ? Common model or server only? \textbf{common}}\\
+\texttt{ Let's add some dive properties now.}
+\end{frame}
+\begin{frame}{Configure model properties}
+\texttt{    Enter an empty property name when done.}\\
+\texttt{    ? Property name: \textbf{id}}\\
+\texttt{       invoke   loopback:property}\\
+\texttt{    ? Property type: \textbf{number}}\\
+\texttt{    ? Required? \textbf{Yes}}\\
+\texttt{    ? Default value [leave empty for none]: }
+\end{frame}
+\begin{frame}[fragile]{Link models}
+\texttt{\$ lb relation}
+\texttt{    ? Name of the model to create the relationship from:  \textbf{dive}}\\
+\texttt{    ? Relation type: \textbf{has many}}\\
+\texttt{    ? Name of the model to create a relationship with: \textbf{participant}}\\
+\texttt{    ? Name for the relation: \textbf{participants}}\\
+\texttt{    ? Custom foreign key: \textbf{dive\_id}}\\
+\texttt{    ? Whether a "through" model is required? \textbf{No}}
+\end{frame}
+
+\subsection{Start API server}
+\begin{frame}{Start API server}
+\texttt{\$ node .}\\
+~\\
+In debugging mode:\\
+\texttt{\$ DEBUG=loopback:connector:postgresql node .}
+\end{frame}
+
+
+\section{Query data}
+\begin{frame}{Query data}
+Use the built-in explorer: \url{http://localhost:3000/explorer}\\
+\includegraphics[width=\textwidth]{images/explorer-overview.jpg} 
+\end{frame}
+
+\begin{frame}{The End}
+Questions ?\\
+~\\
+All code and presentation:\\
+\url{https://github.com/ndsmyter/loopback-brownbag}\\
+~\\
+\hyperref[mailto:Nicolas.DeSmyter@esfds.com]{Nicolas.DeSmyter@esfds.com}
+\end{frame}
+
+\end{document}
