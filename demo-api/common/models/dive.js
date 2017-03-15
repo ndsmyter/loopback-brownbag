@@ -12,7 +12,7 @@ module.exports = function (Dive) {
     Dive.divesByCountry = function (country, cb) {
         var Location = app.models.location;
 
-        Location.find({fields: ["id"], where: {location: country}}, function (err, locations) {
+        Location.find({fields: ["id"], where: {country: country}}, function (err, locations) {
             var locationIds = [];
             for (var i = 0, length = locations.length; i < length; i++) {
                 locationIds.push(locations[i].id);
@@ -23,6 +23,8 @@ module.exports = function (Dive) {
 
     Dive.remoteMethod('divesByCountry', {
         accepts: {arg: 'country', type: 'string'},
-        returns: {arg: 'dives', type: 'Dive[]'}
+        returns: {arg: 'dives', type: 'Dive[]'},
+        description: 'List the dives that are organized in a specific country',
+        http: {verb: 'get'}
     });
 };

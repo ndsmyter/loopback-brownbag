@@ -14,5 +14,6 @@ Dive.divesByCountry = function (country, cb) {
 Dive.remoteMethod('divesByCountry', {
     accepts: {arg: 'country', type: 'string'},
     returns: {arg: 'dives', type: 'Dive[]'},
+    description: 'List the dives that are organized in a specific country',
     http: {verb: 'get'}
 });
