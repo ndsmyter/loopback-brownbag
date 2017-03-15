@@ -331,10 +331,3 @@ This option isn't free though, so that is the reason I manually configure it for
 * Requirements:
     * Node.js 4.x or higher
 * More information: http://loopback.io/
-    
-
-# Build demo website
-
-    $ ng new demo-website
-    $ cd demo-website
-    $ ng serve
