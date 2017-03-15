@@ -272,7 +272,7 @@ Using a remote method, a new operation is added to the selected endpoint.
 The implementation of this operation is written in the `/common/models/<endpoint>.js` file.
 
 It's possible to execute the basic actions of the model on the object itself.
-Every model has several methods that can be used, among others: `create`, `updateAll`, `updateAttribute`,
+Every model has several methods that can be used, among others: `create`, `find`, `findOne`, `updateAll`, `updateAttribute`,
 `createUpdates`, `destroyAll`. 
 
 For example:

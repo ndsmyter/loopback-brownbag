@@ -21,6 +21,32 @@
 \newlength\slideheight
 \setlength\slideheight{3cm}
 
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstset{
+   language=JavaScript,
+   extendedchars=true,
+   basicstyle=\tiny\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
 
 \begin{document}
 
@@ -34,7 +60,8 @@
 
 \section{Intro}
 \begin{frame}{Loopback}
-LoopBack is a highly-extensible, open-source Node.js framework that enables you to create dynamic end-to-end REST APIs with little or no coding.
+LoopBack is a highly-extensible, open-source Node.js framework that enables you to create dynamic end-to-end REST APIs with little or no coding.\\
+\includegraphics[width=\textwidth]{images/explorer-overview.jpg} 
 \end{frame}
 
 \section{Installation and configuration}
@@ -80,13 +107,42 @@ LoopBack is a highly-extensible, open-source Node.js framework that enables you 
 \texttt{    ? Default value [leave empty for none]: }
 \end{frame}
 \begin{frame}[fragile]{Link models}
-\texttt{\$ \textbf{lb relation}}
+\texttt{\$ \textbf{lb relation}}\\
 \texttt{    ? Name of the model to create the relationship from:  \textbf{dive}}\\
 \texttt{    ? Relation type: \textbf{has many}}\\
 \texttt{    ? Name of the model to create a relationship with: \textbf{participant}}\\
 \texttt{    ? Name for the relation: \textbf{participants}}\\
 \texttt{    ? Custom foreign key: \textbf{dive\_id}}\\
 \texttt{    ? Whether a "through" model is required? \textbf{No}}
+\end{frame}
+
+\subsection{User implemented method}
+\begin{frame}{Existing methods}
+Every model:
+\begin{itemize}
+\item create
+\item find
+\item findOne
+\item findById
+\item updateAll
+\item createUpdates
+\item destroyAll
+\item ...
+\end{itemize}
+\end{frame}
+\begin{frame}{Remote method}
+\lstinputlisting[language=JavaScript]{code/divesByCountry.js}
+\end{frame}
+
+\begin{frame}{Access control}
+\begin{itemize}
+\item \texttt{\$ lb acl}
+\item Built-in, using authentication tokens
+\item Security per method or end-point
+\item \texttt{*}, \texttt{READ}, \texttt{WRITE}, \texttt{EXECUTE}
+\item \texttt{DENY}, \texttt{ALLOW}
+\item \texttt{\$everyone}, \texttt{\$authenticated}, \texttt{\$unauthenticated}, \texttt{\$owner}
+\end{itemize}
 \end{frame}
 
 \subsection{Start API server}
@@ -104,6 +160,17 @@ Use the built-in explorer: \url{http://localhost:3000/explorer}\\
 \includegraphics[width=\textwidth]{images/explorer-overview.jpg} 
 \end{frame}
 
+\begin{frame}{Filter}
+\begin{itemize}
+\item fields
+\item where
+\item include
+\item order
+\item offset
+\item limit
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Query data - Request}
 \includegraphics[width=\textwidth]{images/explorer-request.jpg} 
 \end{frame}
@@ -112,6 +179,30 @@ Use the built-in explorer: \url{http://localhost:3000/explorer}\\
 \includegraphics[width=\textwidth]{images/explorer-response.jpg} 
 \end{frame}
 
+\section{Conclusion}
+\subsection{Further reading}
+\begin{frame}{Further reading}
+\begin{itemize}
+\item \hyperref[http://loopback.io/doc/en/lb3/Defining-boot-scripts.html]{Boot scripts}
+\item \hyperref[http://loopback.io/doc/en/lb3/Validating-model-data.html]{Input validation}
+\item Changes to core code needed for geographic support
+\end{itemize}
+\end{frame}
+\begin{frame}{IBM API Connect}
+-- Betalend
+\includegraphics[width=\textwidth]{images/ibm-api-connect2.jpg}\\
+\url{www-03.ibm.com/software/products/en/api-connect}
+\end{frame}
+\begin{frame}{Conclusion}
+\begin{itemize}
+\item[+] Easy to configure and use
+\item[+] Different database types supported
+\item[+] Highly configurable
+\item[+] Good and useful documentation with examples
+\item[+] Input validation
+\item[--] No native geographic support (code changes)
+\end{itemize}
+\end{frame}
 \begin{frame}{The End}
 Questions ?\\
 ~\\
