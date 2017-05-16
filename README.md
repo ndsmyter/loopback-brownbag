@@ -1,4 +1,4 @@
-# Demo Application
+# Standardized API Development using Node.js
 
 In this demo application, I'm going to go step by step through the installation.
 The application will show the dives that are planned in a scuba diving club.
