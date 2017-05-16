@@ -1,8 +1,13 @@
 # Standardized API Development using Node.js
 
-In this demo application, I'm going to go step by step through the installation.
-The application will show the dives that are planned in a scuba diving club.
+This is a step by step tutorial to get a standardized API.
+The API will show the dives that are planned in a scuba diving club.
 For every dive, there is a diving location, and also participants.
+
+More information about this API can be found on the following Github URL.
+Here, all the code is combined to show the full picture of the API code.
+
+https://github.com/ndsmyter/loopback-brownbag
 
 # Create API using Loopback
 ## Install Loopback and setup API
